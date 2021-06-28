@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'r15j)s2)8+k&1_9p9gaz^gf-olp-)v)57hd_dl__t)ki^h%f_0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['*']
@@ -139,7 +139,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 if DEBUG:
-    TOKEN = '1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I'
+    TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo'
     # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://5389024fc5b7.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
 else:
     TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo'
