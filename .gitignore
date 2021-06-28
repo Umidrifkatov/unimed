@@ -4,9 +4,16 @@ __pycache__/
 *$py.class
 *__init__.py
 
+
+db.sqlite3
+db.sqlite3-journal
+
+
 # C extensions
 *.so
-
+product_images/*
+commercial_proposals/*
+product_standards_of_equipment/*
 # Distribution / packaging
 .Python
 build/
@@ -52,6 +59,8 @@ coverage.xml
 .pytest_cache/
 cover/
 
+
+
 # Translations
 *.mo
 *.pot
@@ -59,8 +68,7 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-# db.sqlite3
-# db.sqlite3-journal
+
 
 # Flask stuff:
 instance/
