@@ -1,0 +1,15 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <section class="container">
+        <div class="category-heading py-5">
+            <h1>{{ category.name }}</h1>
+        </div>
+        <div class="row align-items-stretch">
+            {% for product in category.products.all %}
+                <div class="col-12 col-md-4 py-3">
+                    {% include 'components/product-block.html' with product=product %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock content %}

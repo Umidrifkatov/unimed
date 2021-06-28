@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  db:
+    image: "postgres"
+    restart: on-failure
+    env_file:
+      - .env
+    network_mode: host
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    env_file:
+      - .env
+    command: daphne -b 0.0.0.0 -p 8000 unimed.asgi:application
+    restart: on-failure
+    volumes:
+      - .:/code
+    network_mode: host
+    depends_on:
+      - db
+
+  telegram_bot:
+    build: .
+    env_file:
+      - .env
+    command: python manage.py start_bot
+    restart: on-failure
+    volumes:
+      - .:/code
+    network_mode: host
+    depends_on:
+      - db

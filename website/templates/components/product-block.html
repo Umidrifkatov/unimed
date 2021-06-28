@@ -1,0 +1,14 @@
+<a class="product-block h-100" href="{% url 'product-detail' product.slug %}">
+    <div class="card h-100">
+        {% if product.images.count > 0 %}
+            <img class="card-img" src="{{ product.images.first.image_file.url }}" alt="{{ product.name }}">
+        {% endif %}
+        <div class="card-body">
+            <h2>{{ product.name }}</h2>
+            <hr>
+            <p>
+                {{ product.short_description |safe }}
+            </p>
+        </div>
+    </div>
+</a>

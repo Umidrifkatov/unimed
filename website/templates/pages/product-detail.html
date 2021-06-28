@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <section class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in product.images.all %}
+                            <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                                <img src="{{ image.image_file.url }}" class="d-block w-100" alt="...">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="product-heading pt-5">
+                    <h1 class="fw-bold">{{ product.name }}</h1>
+                </div>
+                <hr>
+                <div class="product-short-description">
+                    <div class="py-5">
+                        {{ product.short_description|safe }}
+                    </div>
+                </div>
+                <div class="product-files">
+                    <div class="row">
+                        {% if product.commercial_proposal_file %}
+                            <div class="col-4 d-flex align-items-center justify-content-center">
+                                <a class="product-info-button product-order-button"
+                                   href="{% url 'product-order' product.slug %}">
+                                    <i class='bx bxs-down-arrow-circle'></i>
+                                    <p>Запросить КП</p>
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if product.brochure %}
+                            <div class="col-4 d-flex align-items-center justify-content-center">
+                                <a class="product-info-button" href="{{ product.brochure.url }}">
+                                    <i class='bx bx-book-reader'></i>
+                                    <p>Скачать брошюру</p>
+                                </a>
+                            </div>
+                        {% endif %}
+                        {% if product.standard_of_equipment %}
+                            <div class="col-4 d-flex align-items-center justify-content-center">
+                                <a class="product-info-button" href="{{ product.brochure.url }}">
+                                    <i class='bx bxs-book-content'></i>
+                                    <p>Скачать стандарты <br> оснащения</p>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <article>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="long-description-tab" data-bs-toggle="tab"
+                            data-bs-target="#long-description"
+                            type="button" role="tab" aria-controls="long-description" aria-selected="true">Общее
+                        описание
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="technical-details-tab" data-bs-toggle="tab"
+                            data-bs-target="#technical-details"
+                            type="button" role="tab" aria-controls="technical-details" aria-selected="false">Технические
+                        характеристики
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="long-description" role="tabpanel"
+                     aria-labelledby="long-description-tab">
+                    <div class="py-4">{{ product.long_description|safe }}</div>
+                </div>
+                <div class="tab-pane fade" id="technical-details" role="tabpanel"
+                     aria-labelledby="technical-details-tab">
+                    <div class="py-4">{{ product.technical_details|safe }}</div>
+                </div>
+            </div>
+        </article>
+    </section>
+{% endblock content %}

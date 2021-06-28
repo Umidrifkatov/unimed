@@ -1,0 +1,263 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block hero %}
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center">
+        <div class="container">
+            <h1>Добро пожаловать <br> в Unimed Trade</h1>
+            <h2>UNIMED TRADE - поставщик высокотехнологичного восстановленного <br> медицинского оборудования на
+                территории Республики Узбекистан</h2>
+            <a href="{% url 'category-list' %}" class="btn-get-started scrollto">Перейти в каталог</a>
+        </div>
+    </section><!-- End Hero -->
+{% endblock hero %}
+
+{% block content %}
+
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+        <div class="container-fluid container-xxl">
+
+            <div class="row">
+                <div class="col-xl-4 d-flex justify-content-center align-items-stretch">
+                    <div class="content">
+                        <h3>О нас</h3>
+                        <p>
+                            Компания UNIMED TRADE - поставщик высокотехнологичного восстановленного медицинского оборудования на территории Республики Узбекистан. Мы комплексно оснащаем медицинские учреждения c предоставлением гарантии на технику, обеспечиваем сервисное обслуживание оборудования.
+                        </p>
+                        <div class="text-center">
+                            <a href="{% url 'category-list' %}" class="more-btn">Посмотреть каталог <i
+                                    class="bx bx-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 d-flex align-items-stretch">
+                    <div class="icon-boxes d-flex flex-column justify-content-center">
+                        <div class="row">
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class='bx bx-select-multiple'></i>
+                                    <h4>Тщательный отбор</h4>
+                                    <p>Оборудование проходит тщательный отбор с последующей диагностикой
+                                        высококвалифицированными специалистами нашей компании, а также этап
+                                        восстановления для дальнейшей эксплуатации в медицинских учреждениях Республики
+                                        Узбекистан.</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class='bx bx-line-chart'></i>
+                                    <h4>Гарантия качества</h4>
+                                    <p>Гарантия качества - на все товары предусмотрены разрешительные/нормативные
+                                        документы, сертификаты, подтверждающие соответствие заявленным параметрам и
+                                        функциям, так как мы работаем только с продукцией, в надежности которой уверены
+                                        на 100%.</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 d-flex align-items-stretch">
+                                <div class="icon-box mt-4 mt-xl-0">
+                                    <i class='bx bx-money'></i>
+                                    <h4>Рассрочка платежа и аренда</h4>
+                                    <p>Компания UNIMED TRADE предоставляет рассрочку платежа до 2 лет (без переплаты).
+                                        Аренда значительно снизит ваши первоначальные затраты и покажет, какие
+                                        медаппараты вам нужны, а от которых стоит отказаться и вовсе. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End .content-->
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+        <div class="container-fluid">
+
+            <div class="row">
+                <!--<div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch position-relative">
+                    <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox play-btn mb-4"></a>
+                </div> -->
+                <div class="col-xl-5 col-lg-6">
+                    <video class="service-promo-video" autoplay muted loop src="{% static 'img/service-box-4.mp4' %}"></video>
+                </div>
+
+                <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+                    <h3>Насколько дешевле восстановленное медоборудование?</h3>
+                    <p>Мы комплексно оснащаем медицинские учреждения c предоставлением гарантии на технику, обеспечиваем сервисное обслуживание оборудования. Восстановленное медоборудование в 2-5 раза дешевле нового, главное не купить "хлам", в чем наши эксперты вам помогут!</p>
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Section -->
+
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Выгодные предложения</h2>
+                <p></p>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-md-4 py-3">
+                    <video class="service-promo-video" autoplay muted loop src="{% static 'img/service-box-1.m4v' %}"></video>
+                </div>
+                <div class="col-12 col-md-4 py-3">
+                    <video class="service-promo-video" autoplay muted loop src="{% static 'img/service-box-2.m4v' %}"></video>
+                </div>
+                <div class="col-12 col-md-4 py-3">
+                    <video class="service-promo-video" autoplay muted loop src="{% static 'img/service-box-3.m4v' %}"></video>
+                </div>
+                <!--<div class="col-12 col-md-3 py-3">
+                    <video class="service-promo-video" autoplay muted src="{% static 'img/service-box-4.mp4' %}"></video>
+                </div>-->
+
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <section id="faq" class="faq section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Часто задаваемые вопросы</h2>
+                <p>Если у вас возникли вопросы, которые вы не найдете здесь, вы всегда можете с нами связаться.</p>
+            </div>
+
+            <div class="faq-list">
+                <ul>
+                    {% for faq in faqs %}
+                        <li data-aos="fade-up">
+                            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse"
+                                                                           data-bs-target="#faq-list-{{ forloop.counter }}"
+                                                                           class="collapsed">
+                            {{ faq.question }}
+                            <i class="bx bx-chevron-down icon-show"></i><i
+                                class="bx bx-chevron-up icon-close"></i></a>
+                            <div id="faq-list-{{ forloop.counter }}" class="collapse" data-bs-parent=".faq-list">
+                                <p>
+                                    {{ faq.answer }}
+                                </p>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+
+            <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+
+                    {% for feedback in feedbacks %}
+                        <div class="swiper-slide">
+                            <div class="testimonial-wrap">
+                                <div class="testimonial-item">
+                                    <h3>{{ feedback.name }}</h3>
+                                    <h4>{{ feedback.company }}</h4>
+                                    <p>
+                                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                        {{ feedback.feedback_text }}
+                                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section><!-- End Testimonials Section -->
+
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Связаться с нами</h2>
+                <p>Мы рады сотрудничеству! Свяжитесь с нами заполнив форму снизу.</p>
+            </div>
+        </div>
+
+        <div>
+            <!-- <iframe style="border:0; width: 100%; height: 350px;"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d749.1445960081346!2d69.29367752926188!3d41.31803479870442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef4d1f2e2ed7b%3A0xa1cf97f4cea98ef6!2sHamid%20Alimjan%20Square%2C%20Tashkent%2C%20Uzbekistan!5e0!3m2!1sen!2s!4v1617390993351!5m2!1sen!2s"
+                    frameborder="0" allowfullscreen></iframe> -->
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A0d087970414862bb5a62b0a87caef1de5877d0ec7c0f56c57e2132edbef42091&amp;source=constructor" width="100%" height="350" frameborder="0"></iframe>        </div>
+
+        <div class="container">
+            <div class="row mt-5">
+
+                <div class="col-lg-4">
+                    <div class="info">
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Адрес:</h4>
+                            <p>г.Ташкент. 6-проезд ул.Халкабод 25A</p>
+                        </div>
+
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Почта:</h4>
+                            <p>info@unimedtrade.uz</p>
+                        </div>
+
+                        <div class="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4>Телефон:</h4>
+                            <p>+99897 762 09 55</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8 mt-5 mt-lg-0 d-flex justify-content-center align-items-center">
+
+                    <form action="{% url 'contact-request' %}" method="post" role="form" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-5">
+                                <div class="py-5">
+                                    <input class="form-control" type="text" name="phone_number" maxlength="255" required
+                                           id="id_phone_number" placeholder="Номер телефона">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit">Заказать звонок</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+
+{% endblock content %}

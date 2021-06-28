@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <section class="container">
+        <div class="py-5"></div>
+        <section class="section-bg">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Запросить коммерческое предложение</h2>
+                    <p>Для того чтобы запросить коммерческое предложение для продукта "{{ product.name }}"
+                        пожалуйста,
+                        заполните форму ниже.</p>
+                </div>
+                <div class="form-wrapper row justify-content-center">
+                    <div class="col-12 col-md-4">
+                        <form id="product-order-form" action="{% url 'product-order' product.slug %}" method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div>
+                                <button type="submit">Запросить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+{% endblock content %}

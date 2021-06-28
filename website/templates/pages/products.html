@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<h1 class="mt-5"></h1> <br><br>
+<div class="row">
+
+
+
+{% for i in  products%}
+
+<div class="col-12 col-md-4 py-3">
+    {% include 'components/product-block.html' with product=i %}
+</div>
+{% endfor %}
+</div>
+{% endblock %}

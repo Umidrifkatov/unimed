@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    <section class="container">
+        {% for parent_category in categories %}
+            <h1 class="pt-5">{{ parent_category.name }}</h1>
+            {% for category in parent_category.child_categories.all %}
+                <div class="category-block py-5">
+                    <h2><a href="{% url 'category-detail' category.slug %}">{{ category.name }} <i class="fas fa-arrow-right"></i></a></h2>
+                    <hr>
+                    <div class="row align-items-stretch">
+                        {% for product in category.products.all|slice:":3" %}
+                            <div class="col-12 col-md-3">
+                                {% include 'components/product-block.html' with product=product %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </section>
+{% endblock content %}
