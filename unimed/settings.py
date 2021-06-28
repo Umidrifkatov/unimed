@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'r15j)s2)8+k&1_9p9gaz^gf-olp-)v)57hd_dl__t)ki^h%f_0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -130,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-MAIN_URL = 'https://5389024fc5b7.ngrok.io'
+MAIN_URL = 'https://unimedtrade.uz'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
@@ -142,8 +142,8 @@ if DEBUG:
     TOKEN = '1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I'
     # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://5389024fc5b7.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
 else:
-    TOKEN = '1656217737:AAEGua7CYhVD4oKl98ynMnKvG280fY4yOe4'
-    # https://api.telegram.org/bot1656217737:AAEGua7CYhVD4oKl98ynMnKvG280fY4yOe4/setWebhook?url=https://f6a47dbd229a.ngrok.io/telegram/1656217737:AAEGua7CYhVD4oKl98ynMnKvG280fY4yOe4/
+    TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo'
+    # https://api.telegram.org/bot1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/setWebhook?url=https://unimedtrade.uz/telegram/1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/
     
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
