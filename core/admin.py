@@ -52,5 +52,13 @@ admin.site.register(ContactRequest)
 
 class TuserAdmin(admin.ModelAdmin):
     list_display = ('userid', 'step', 'phone',)
+    readonly_fields=('userid', 'step', 'phone',)
+    # This will help you to disbale add functionality
+    def has_add_permission(self, request):
+        return False
+
+    # This will help you to disable delete functionaliyt
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 admin.site.register(Tuser, TuserAdmin)
