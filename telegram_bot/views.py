@@ -42,7 +42,7 @@ def send_welcome(message):
 
     pic.close()
     # second message with line and keybuttons
-    text = '…………………………………………………'
+    text = 'Выберите категорию'
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     buttons = [telebot.types.KeyboardButton(text=i.name) for i in ParentCategory.objects.all()]
     back = telebot.types.KeyboardButton(text='/start')

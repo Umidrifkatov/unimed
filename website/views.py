@@ -16,13 +16,11 @@ class HomePage(TemplateView):
         return context
 
 def ProductList(request):
-    products = Product.objects.filter(name__icontains=request.GET.get('search'))
+    products = Product.objects.filter(name_search__icontains=request.GET.get('search'))
     context = {
         "products":products,
     }
     return render(request, "pages/products.html", context)
-
-
 
 
 

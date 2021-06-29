@@ -70,7 +70,7 @@ def product(message, bot, user):
     text = product.short_description
     text = f'Производитель: <b>{product.manufacturer.name}</b>\n\n' + text
     text = f'<b>{product.name}</b>\n\n' + text
-    text = text + f'\n\n<a href="{settings.MAIN_URL}{product.brochure.url}">Подробнее</a>'
+    text = text + f'\n\n<a href="{settings.MAIN_URL}/products/{product.slug}">Подробнее</a>'
     
     pic = product.images.first().image_file.file
     keyboard = telebot.types.InlineKeyboardMarkup(row_width=2)
