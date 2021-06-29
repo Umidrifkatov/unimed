@@ -20,7 +20,7 @@ class ProductImageInline(admin.StackedInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'name_search',)
     list_filter = ('category', 'manufacturer',)
     prepopulated_fields = {
         'slug': ('name',),
