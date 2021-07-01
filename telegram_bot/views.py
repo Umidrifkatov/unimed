@@ -3,11 +3,13 @@ from django.core.exceptions import PermissionDenied
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import telebot
-from .constants import BUTTONS, STEP, SETTINGS
+from .constants import BUTTONS, STEP
 from core.models import *
 from .services import *
 
 bot = telebot.TeleBot(settings.TOKEN, threaded=True)
+
+
 
 @csrf_exempt
 def worker(request):
@@ -46,9 +48,33 @@ def send_welcome(message):
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     buttons = [telebot.types.KeyboardButton(text=i.name) for i in ParentCategory.objects.all()]
     back = telebot.types.KeyboardButton(text='/start')
+    connect = telebot.types.KeyboardButton(text='/Связаться')
     keyboard.add(*buttons)
+    keyboard.add(connect)
     keyboard.add(back)
     bot.send_message(user.userid, text, reply_markup=keyboard)
+    
+
+
+@bot.message_handler(commands=['Связаться'])
+def connection(message):
+    user = Tuser.objects.get(userid=message.from_user.id)
+    user.step = STEP['waiting_phone']
+    user.save()
+    bot.send_location(user.userid, settings.LOC, settings.LOC1)
+    text = '<b>Адрес</b> - г.Ташкент. 6-проезд ул.Халкабод 25A\n\n<b>Телефон</b> +998712004404 \n\n'
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    connect = telebot.types.KeyboardButton(text='Перезвонить мне', request_contact=True)
+    back = telebot.types.KeyboardButton(text='/назад')
+    keyboard.add(connect)
+    keyboard.add(back)
+    bot.send_message(user.userid, text, reply_markup=keyboard, parse_mode="HTML")
+
+
+
+    
+    
+
     
 
 
@@ -66,6 +92,7 @@ def all_text_messages_switcher(message, bot, user):
             STEP['p_category']: chosenpcategory, 
             STEP['medium_category']: chosenmcategory,
             STEP['product']: product,
+            STEP['waiting_phone']: get_phone,
             
         }
         func = switcher.get(int(user.step), unknown_message)

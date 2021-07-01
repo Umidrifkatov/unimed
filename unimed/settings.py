@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-
+GROUP_ID = '-1001343885882'
 MAIN_URL = 'https://unimedtrade.uz'
 
 STATIC_URL = '/static/'
@@ -138,12 +138,15 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-if DEBUG:
-    TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo'
-    # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://5389024fc5b7.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
-else:
-    TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo'
-    # https://api.telegram.org/bot1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/setWebhook?url=https://unimedtrade.uz/telegram/1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/
-    
+LOC = 41.332717
+LOC1 = 69.288738
+
+
+# TOKEN = '1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I' #test
+# # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://3d407f364d7f.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
+
+TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo' # prod
+# https://api.telegram.org/bot1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/setWebhook?url=https://unimedtrade.uz/telegram/1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

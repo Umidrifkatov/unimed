@@ -18,16 +18,31 @@ def back(message, bot, user):
 
 
 
-
-
-
-
-
-
-
-
 # STEPS @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # ••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+
+def get_phone(message, bot, user):
+    got = False
+    if message.content_type == 'contact':
+        a = message.contact.phone_number
+        if a.startswith('+'):
+            a = a[1:]
+        got = True
+    elif len(message.text) == 12 and message.text.isdigit():
+        a = message.text
+        got = True
+    if got:
+        user.phone = a
+        user.save()
+        text = f'Получен запрос на обратный звонок\n\n +{a}'
+        bot.send_message(settings.GROUP_ID, text)
+        bot.send_message(user.userid, text)
+    else:
+        bot.send_message(user.userid, text='Введите номер телефона в формате 998987654321 или отправьте контакт')
+
+    
+
 
 
 def chosenpcategory(message, bot, user):
@@ -43,8 +58,6 @@ def chosenpcategory(message, bot, user):
     bot.send_message(user.userid, text, reply_markup=keyboard)
     
     
-    
-
 
 def chosenmcategory(message, bot, user):
     user.step = STEP['product']
@@ -65,6 +78,7 @@ def chosenmcategory(message, bot, user):
     bot.send_message(user.userid, text, reply_markup=keyboard)
 
 
+
 def product(message, bot, user):  
     product = Product.objects.get(name=message.text[:-4])
     text = product.short_description
@@ -79,3 +93,12 @@ def product(message, bot, user):
     keyboard.add(buttons)
     
     bot.send_photo(user.userid, pic, text, reply_markup=keyboard, parse_mode='HTML')
+
+
+
+
+#$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+# SERVICES
+
+def group_notificator(text="test"):
+    bot.send_message(settings.GROUP_ID, text, parse_mode="HTML")
