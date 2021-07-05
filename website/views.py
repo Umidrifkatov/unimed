@@ -16,7 +16,7 @@ class HomePage(TemplateView):
         return context
 
 def ProductList(request):
-    products = Product.objects.filter(name_search__icontains=request.GET.get('search'))
+    products = Product.objects.filter(name_search__icontains=request.GET.get('search').lower())
     context = {
         "products":products,
     }

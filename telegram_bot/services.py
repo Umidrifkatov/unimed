@@ -49,21 +49,46 @@ def chosenpcategory(message, bot, user):
     user.step = STEP['medium_category']
     user.save()
     text = message.text
-    p_category = Category.objects.filter(parent__name=message.text)
-    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    buttons = [telebot.types.KeyboardButton(text=i.name) for i in p_category]
-    key = telebot.types.KeyboardButton(text='/назад')
-    keyboard.add(*buttons)
-    keyboard.add(key)
-    bot.send_message(user.userid, text, reply_markup=keyboard)
+    if ParentCategory.objects.get(name=message.text):
+
+        p_category = Category.objects.filter(parent__name=message.text)
+        keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+        buttons = [telebot.types.KeyboardButton(text=i.name) for i in p_category]
+        key = telebot.types.KeyboardButton(text='/назад')
+        keyboard.add(*buttons)
+        keyboard.add(key)
+        bot.send_message(user.userid, text, reply_markup=keyboard)
     
     
 
 def chosenmcategory(message, bot, user):
+    user.step = STEP['manufacturer']
+    category = Category.objects.get(name=message.text)
+    user.prestep = category.id
+    user.save()
+    text = message.text
+    manufacturers = []
+    all_product = Product.objects.filter(category=category)
+    for man in all_product:
+        if man.manufacturer not in manufacturers:
+            manufacturers.append(man.manufacturer)
+    
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    buttons = []
+    for i in manufacturers:
+        buttons.append(telebot.types.KeyboardButton(text=i.name))
+    key = telebot.types.KeyboardButton(text='/назад')
+    keyboard.add(*buttons)
+    keyboard.add(key)
+    bot.send_message(user.userid, text, reply_markup=keyboard)
+
+
+def manufacturer(message, bot, user):
     user.step = STEP['product']
     user.save()
     text = message.text
-    p_category = Product.objects.filter(category__name=message.text)
+    p_category = Product.objects.filter(category__id=user.prestep, manufacturer__name=message.text)
+
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     buttons = []
     for i in p_category:
@@ -79,6 +104,8 @@ def chosenmcategory(message, bot, user):
 
 
 
+
+
 def product(message, bot, user):  
     product = Product.objects.get(name=message.text[:-4])
     text = product.short_description
@@ -89,8 +116,9 @@ def product(message, bot, user):
     pic = product.images.first().image_file.file
     keyboard = telebot.types.InlineKeyboardMarkup(row_width=2)
     buttons = telebot.types.InlineKeyboardButton(text="Коммерческое предложение", url=f"{settings.MAIN_URL}{product.commercial_proposal_file.url}")
-    
+    button = telebot.types.InlineKeyboardButton(text="Обратный звонок", callback_data='call')
     keyboard.add(buttons)
+    keyboard.add(button)
     
     bot.send_photo(user.userid, pic, text, reply_markup=keyboard, parse_mode='HTML')
 

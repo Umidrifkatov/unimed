@@ -38,33 +38,30 @@ def send_welcome(message):
     b1 = telebot.types.InlineKeyboardButton(text="Открыть сайт", url="unimedtrade.uz")
     b2 = telebot.types.InlineKeyboardButton(text="О компании", url="unimedtrade.uz")
     b3 = telebot.types.InlineKeyboardButton(text="Подробно о рассрочке", url="unimedtrade.uz")
+    b4 = telebot.types.InlineKeyboardButton(text='🔎 Поиск', switch_inline_query_current_chat="МРТ")
     keyboard.add(b1,b2)
     keyboard.add(b3)
+    keyboard.add(b4)
     bot.send_photo(user.userid, pic, text, reply_markup=keyboard, parse_mode='HTML')
-
     pic.close()
     # second message with line and keybuttons
     text = 'Выберите категорию'
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     buttons = [telebot.types.KeyboardButton(text=i.name) for i in ParentCategory.objects.all()]
-    back = telebot.types.KeyboardButton(text='/start')
-    connect = telebot.types.KeyboardButton(text='/Связаться')
     keyboard.add(*buttons)
-    keyboard.add(connect)
-    keyboard.add(back)
     bot.send_message(user.userid, text, reply_markup=keyboard)
     
 
 
-@bot.message_handler(commands=['Связаться'])
+@bot.message_handler(commands=['about'])
 def connection(message):
     user = Tuser.objects.get(userid=message.from_user.id)
     user.step = STEP['waiting_phone']
     user.save()
     bot.send_location(user.userid, settings.LOC, settings.LOC1)
-    text = '<b>Адрес</b> - г.Ташкент. 6-проезд ул.Халкабод 25A\n\n<b>Телефон</b> +998712004404 \n\n'
+    text = '<b>Адрес</b> - г.Ташкент. 6-проезд ул.Халкабод 25A\n\n<b>Телефон</b> +998712004404 \n\n\n<b>Нажмите на кнопку "📱 Перезвонить мне" чтобы с вами связались</b>'
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    connect = telebot.types.KeyboardButton(text='Перезвонить мне', request_contact=True)
+    connect = telebot.types.KeyboardButton(text='📱 Перезвонить мне', request_contact=True)
     back = telebot.types.KeyboardButton(text='/назад')
     keyboard.add(connect)
     keyboard.add(back)
@@ -93,6 +90,8 @@ def all_text_messages_switcher(message, bot, user):
             STEP['medium_category']: chosenmcategory,
             STEP['product']: product,
             STEP['waiting_phone']: get_phone,
+            STEP['manufacturer']: manufacturer,
+
             
         }
         func = switcher.get(int(user.step), unknown_message)
@@ -119,3 +118,52 @@ def buttons_answer(message):
         print(e)
         unknown_message(message, bot, user)
 
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def call_message(message):
+    parts = message.data
+    if parts == 'call':
+        connection(message)
+
+
+
+
+
+
+
+
+
+
+
+
+@bot.inline_handler(lambda query: len(query.query) > 0)
+def query_text(query):
+    if not Tuser.objects.filter(userid = query.from_user.id).exists():
+        Tuser.objects.create(userid=query.from_user.id)
+    
+    kb = telebot.types.InlineKeyboardMarkup(row_width=2)
+    first = telebot.types.InlineKeyboardButton(text="Сайт", url="unimedtrade.uz")
+    second = telebot.types.InlineKeyboardButton(text="БОТ", url="https://t.me/UnimedStoreBot")
+    search = telebot.types.InlineKeyboardButton(text='🔎 Поиск', switch_inline_query_current_chat="кт")
+    search = telebot.types.InlineKeyboardButton(text='Перезвонить 📲', url="https://t.me/UnimedStoreBot")
+    kb.add(first, second)
+    kb.add(search)
+
+    products = Product.objects.filter(name_search__icontains=query.query.lower())
+    
+    results = []
+    for prod in products:
+        if len(results) < 20:
+
+            msg = telebot.types.InlineQueryResultArticle(
+                id=f"{prod.id}", title=f"{prod.manufacturer.name} {prod.name}",
+                input_message_content=telebot.types.InputTextMessageContent(message_text=f'{prod.manufacturer.name} {prod.name}\n\n {prod.short_description}\n\nОБОРУДОВАНИЕ В РАССРОЧКУ + TRADE-IN. \nUNIMED TRADE - поставщик нового и восстановленного медицинского оборудования в Узбекистане\n\n +998712004404\n@unimedstorebot'),
+                reply_markup=kb,
+
+
+            )
+
+        
+            results.append(msg)
+    bot.answer_inline_query(query.id, results, cache_time=0)

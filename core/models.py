@@ -167,6 +167,7 @@ class Tuser(models.Model):
     userid = models.CharField(max_length=50, verbose_name='Telegram ID')
     step = models.CharField(max_length=5, verbose_name='Шаг', default=1)
     phone = models.CharField(max_length=14, verbose_name='Телефон', null=True, blank=True)
+    prestep = models.CharField(max_length=5, verbose_name='Предыдущее действие', null=True)
 
     def __str__(self):
         return self.userid

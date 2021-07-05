@@ -4,6 +4,7 @@ STEP = {
     'product': 3,
     'makeoffer':4,
     'waiting_phone':5,
+    'manufacturer':6,
 
 }
 
