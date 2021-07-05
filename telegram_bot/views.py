@@ -146,9 +146,9 @@ def query_text(query):
     first = telebot.types.InlineKeyboardButton(text="Сайт", url="unimedtrade.uz")
     second = telebot.types.InlineKeyboardButton(text="БОТ", url="https://t.me/UnimedStoreBot")
     search = telebot.types.InlineKeyboardButton(text='🔎 Поиск', switch_inline_query_current_chat="кт")
-    search = telebot.types.InlineKeyboardButton(text='Перезвонить 📲', url="https://t.me/UnimedStoreBot")
+    search1 = telebot.types.InlineKeyboardButton(text='Перезвонить 📲', url="https://t.me/UnimedStoreBot")
     kb.add(first, second)
-    kb.add(search)
+    kb.add(search, search1)
 
     products = Product.objects.filter(name_search__icontains=query.query.lower())
     
