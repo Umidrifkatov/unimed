@@ -158,7 +158,7 @@ def query_text(query):
 
             msg = telebot.types.InlineQueryResultArticle(
                 id=f"{prod.id}", title=f"{prod.manufacturer.name} {prod.name}",
-                input_message_content=telebot.types.InputTextMessageContent(message_text=f'{prod.manufacturer.name} {prod.name}\n\n {prod.short_description}\n\nОБОРУДОВАНИЕ В РАССРОЧКУ + TRADE-IN. \nUNIMED TRADE - поставщик нового и восстановленного медицинского оборудования в Узбекистане\n\n +998712004404\n@unimedstorebot'),
+                input_message_content=telebot.types.InputTextMessageContent(message_text=f'{prod.manufacturer.name} {prod.name}\n\n{prod.short_description}\n\nОБОРУДОВАНИЕ В РАССРОЧКУ + TRADE-IN. \nUNIMED TRADE - поставщик нового и восстановленного медицинского оборудования в Узбекистане\n\n +998712004404\n@unimedstorebot'),
                 reply_markup=kb,
 
 
