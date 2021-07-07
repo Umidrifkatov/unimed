@@ -4,7 +4,7 @@
             <img class="card-img" src="{{ product.images.first.image_file.url }}" alt="{{ product.name }}">
         {% endif %}
         <div class="card-body">
-            <h2>{{ product.name }} <b style="color: rgb(255, 89, 0);">{% if product.is_used %} восстановленный {% else %} новый {% endif%}</b> </h2>
+            <h2>{{ product.name }} <b style="color: rgb(255, 89, 0);">{% if product.is_used %} БУ {% else %} Новый {% endif%}</b> </h2>
             <hr>
             <p>
                 {{ product.manufacturer.name }}

@@ -29,6 +29,14 @@
 
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
     <script src="//code-ya.jivosite.com/widget/9ckrNCo150" async></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5C70V95SJR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-5C70V95SJR');
+    </script>
 </head>
 
 <body>
@@ -83,24 +91,26 @@
                     <li><a class="nav-link scrollto" href="{% url 'home' %}#about">О нас</a></li>
                     <li><a class="nav-link scrollto" href="{% url 'home' %}#services">Услуги</a></li>
                     <li>
-                        
-                            <form action="/search/" method="GET"> 
-                                <div class="input-group">
-                                    <input type="text" class="form-control rounded-pill" placeholder="Поиск" required name="search">
-                                    <div class="input-group-append">
-                                      <button class="btn appointment-btn" type="submit">Поиск</button>
-                                    </div>
+
+                        <form action="/search/" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded-pill" placeholder="Поиск" required
+                                    name="search">
+                                <div class="input-group-append">
+                                    <button class="btn appointment-btn" type="submit">Поиск</button>
                                 </div>
-                            </form>
-                        
+                            </div>
+                        </form>
+
                     </li>
-                    
+
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
 
-            <a href="https://t.me/UNIMEDT" class="appointment-btn scrollto "><span class="d-inline"> Написать  <i class="fab fa-telegram"></i></span>
+            <a href="https://t.me/UNIMEDT" class="appointment-btn scrollto "><span class="d-inline"> Написать <i
+                        class="fab fa-telegram"></i></span>
             </a>
 
         </div>
@@ -167,7 +177,7 @@
         </div>
     </footer><!-- End Footer -->
 
-    
+
     <a href="#" class=" mb-5 back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
@@ -176,23 +186,7 @@
     <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
     <script src="{% static 'vendor/purecounter/purecounter.js' %}"></script>
     <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-    <!-- Facebook Pixel Code -->
-<script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '764121357618396');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=764121357618396&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
+    
 
     <!-- Template Main JS File -->
     <script src="{% static 'js/main.js' %}"></script>
