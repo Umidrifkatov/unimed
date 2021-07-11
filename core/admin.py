@@ -20,7 +20,8 @@ class ProductImageInline(admin.StackedInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_search', 'commercial_proposal_file', 'is_used', )
+    list_display = ('name', 'name_search', 'commercial_proposal_file', 'is_used', 'partner', )
+    list_editable = ('partner',)
     list_filter = ('category', 'manufacturer',)
     prepopulated_fields = {
         'slug': ('name',),
