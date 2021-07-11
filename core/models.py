@@ -56,6 +56,8 @@ class Product(models.Model):
     manufacturer = models.ForeignKey(ProductManufacturer, on_delete=models.CASCADE, related_name='products', verbose_name=_('Производитель'))
     name = models.CharField(max_length=255, unique=True,
                             verbose_name=_('Название (короткое)'))
+    partner = models.CharField(max_length=25, default='Unimed',
+                            verbose_name=_('Партнер'))
     name_search = models.CharField(max_length=400, unique=True, default='Нет',
                             verbose_name=_('Название для поиска (длинное)'))
     slug = models.SlugField(verbose_name=_('Человекочитаемый идентификатор'))
@@ -70,6 +72,7 @@ class Product(models.Model):
     commercial_proposal_file = models.FileField(
         upload_to='commercial_proposals', verbose_name=_('Файл КП'), blank=True, null=True)
     is_used = models.BooleanField(default=True, verbose_name="БУ")
+    
 
     def __str__(self):
         return self.name
