@@ -14,7 +14,8 @@ urlpatterns = [
     path('products/<slug:slug>/order/', views.ProductOrderPage.as_view(), name='product-order'),
     path('contactRequest/', views.ContactRequestFormHandler.as_view(), name='contact-request'),
     path('orderSuccess/', views.OrderSuccessPage.as_view(), name='order-success'),
-    path('contactRequestSuccess/', views.OrderSuccessPage.as_view(), name='contact-request-success')
+    path('contactRequestSuccess/', views.OrderSuccessPage.as_view(), name='contact-request-success'),
+    path('cooperate/', views.Cooperate, name='cooperate')
 ]
 
 if settings.DEBUG:

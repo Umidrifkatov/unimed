@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+
+{% block hero %}
+<div class="mt-5 mx-5"><br><br><br> <br>
+
+
+    <form action="{% url 'contact-request' %}" method="post" role="form" class="php-email-form">
+        {% csrf_token %}
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-5">
+                <h3> Оставьте свои данные и мы обязательно с вами свяжемся</h3>
+                <p>Мы всегда открыты к сотрудничеству и будем рады побеседовать с вами</p>
+                <div class="py-5">
+                    <input class="form-control"  type="number" name="phone_number" maxlength="255" required
+                           id="id_phone_number" placeholder="Номер телефона">
+                    <input type="text" class="form-control mt-3"  type="text" name="info" maxlength="500" 
+                    id="id_info" placeholder="Дополнительная информация / коментарий">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-danger" type="submit">Сотрудничать</button>
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+
+
+</div>
+{% endblock hero %}
+
+
+
+{% block content %}
+{% endblock content %}

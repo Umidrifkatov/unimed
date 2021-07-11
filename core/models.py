@@ -153,6 +153,8 @@ class ContactRequest(models.Model):
         max_length=255, verbose_name=_('Номер телефона'))
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('Дата создания'))
+    info = models.TextField(
+        max_length=500, verbose_name='Доп инфо', null=True, default=None)
 
     def __str__(self):
         return self.phone_number
@@ -175,3 +177,5 @@ class Tuser(models.Model):
     class Meta:
         verbose_name = 'Телеграм пользователь'
         verbose_name_plural = 'Телеграм пользователи'
+
+

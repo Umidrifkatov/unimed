@@ -23,7 +23,6 @@ def ProductList(request):
     return render(request, "pages/products.html", context)
 
 
-
 class CategoryListPage(ListView):
     model = ParentCategory
     template_name = 'pages/category-list.html'
@@ -85,3 +84,12 @@ class ContactRequestFormHandler(CreateView):
 
 class ContactRequestSuccessPage(TemplateView):
     template_name = 'pages/contact-request-success.html'
+
+
+
+def Cooperate(request):
+    form = ContactRequestForm
+    context =  {
+        "form": form
+    }
+    return render(request, 'core/cooperation.html', context)
