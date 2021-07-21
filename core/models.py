@@ -2,11 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from core import constants
 from core.constants import ClientTypeEnum
-
-
-
-
-
+import random
+from django.db.models.signals import pre_save
 
 
 class ParentCategory(models.Model):
@@ -14,12 +11,10 @@ class ParentCategory(models.Model):
                             verbose_name=_('Название'))
     slug = models.SlugField(verbose_name=_('Человекочитаемый идентификатор'))
     
-
     def __str__(self):
         return self.name
 
     class Meta:
-
         verbose_name = _('Родительская категория')
         verbose_name_plural = _('Родительские категории')
 
@@ -29,10 +24,8 @@ class Category(models.Model):
     name = models.CharField(max_length=255, unique=True,
                             verbose_name=_('Название'))
     slug = models.SlugField(verbose_name=_('Человекочитаемый идентификатор'))
-
     def __str__(self):
         return self.name
-
     class Meta:
 
         verbose_name = _('Категория')
@@ -40,7 +33,6 @@ class Category(models.Model):
 
 class ProductManufacturer(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name=_('Название бренда'))
-
     def __str__(self):
         return self.name
 
@@ -168,11 +160,42 @@ class ContactRequest(models.Model):
         verbose_name_plural = 'Запросы на контакт'
 
 
+
+def passgenerate():
+    keys = '123456789qwertyuipasdfghjklzxcvbnmQWERTYUIPASDFGHJKLZXCVBNM'
+    bit = 16
+    bit2 = 0
+    result = ''
+    while bit > bit2:
+        bit2 += 1
+        result += random.choice(keys)
+    return result
+
+class Starter(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название', unique=True)
+    key = models.CharField(max_length=16, verbose_name='Ключ', unique=True, default=passgenerate)
+    link = models.CharField(max_length=100, verbose_name='Ссылка', unique=True, default=f'https://t.me/UnimedStoreBot?start=')
+
+    def __str__(self):
+        self.link = self.link + self.key
+        return self.name
+
+    class Meta:
+        verbose_name = 'Промоутеры'
+        verbose_name_plural = 'Промоутеры'
+
+def create_starter(sender, **kwargs):
+    if kwargs['signal']:
+        kwargs['instance'].link = str(kwargs['instance'].link) + str(kwargs['instance'].key)
+pre_save.connect(create_starter, sender=Starter)
+
+
 class Tuser(models.Model):
     userid = models.CharField(max_length=50, verbose_name='Telegram ID')
     step = models.CharField(max_length=5, verbose_name='Шаг', default=1)
     phone = models.CharField(max_length=14, verbose_name='Телефон', null=True, blank=True)
     prestep = models.CharField(max_length=5, verbose_name='Предыдущее действие', null=True)
+    from_starter = models.ForeignKey(Starter, on_delete=models.CASCADE, null=True, verbose_name='Канал / Пришел')
 
     def __str__(self):
         return self.userid
@@ -180,5 +203,7 @@ class Tuser(models.Model):
     class Meta:
         verbose_name = 'Телеграм пользователь'
         verbose_name_plural = 'Телеграм пользователи'
+
+
 
 

@@ -10,7 +10,6 @@ from .services import *
 bot = telebot.TeleBot(settings.TOKEN, threaded=True)
 
 
-
 @csrf_exempt
 def worker(request):
     if request.META['CONTENT_TYPE'] == 'application/json':
@@ -21,16 +20,31 @@ def worker(request):
     else:
         raise PermissionDenied
 
+    
 
-@bot.message_handler(commands=['start', 'help', 'назад'])
-def send_welcome(message):
+
+@bot.message_handler(commands=['start', 'help', 'назад']) # excluded from main commands handler for 'start', additional parsing data that com with start
+def send_welcome(message): # https://t.me/Unimed_test_bot?start=1
+    mess = message.text.split()
+    starter = None
+    
     try:
-        user = Tuser.objects.get(userid=message.from_user.id)
-    except Exception:
-        user = Tuser.objects.create(userid=message.from_user.id, step=STEP['p_category'])
+        if len(mess) == 2 and mess[1]:
+            try:
+                starter = Starter.objects.get(key=mess[1])
+            except Exception as e:
+                pass
+                         
+         
+        try:
+            user = Tuser.objects.get(userid=message.from_user.id)
+        except Exception as e:
+            user = Tuser.objects.create(userid=message.from_user.id, step=STEP['p_category'], from_starter=starter )
+    except Exception as e:
+        print(e)           
     user.step = STEP['p_category']
     user.save()
-    
+
     # first message with pic and inline messages 
     pic = open('./static/img/tgmain.jpeg', 'rb')
     text = 'Установка <b>под ключ с гарантией</b>.  \n\nИз Европы и США по <b>низким ценам</b> '
@@ -53,6 +67,8 @@ def send_welcome(message):
     
 
 
+
+
 @bot.message_handler(commands=['about'])
 def connection(message):
     user = Tuser.objects.get(userid=message.from_user.id)
@@ -66,14 +82,6 @@ def connection(message):
     keyboard.add(connect)
     keyboard.add(back)
     bot.send_message(user.userid, text, reply_markup=keyboard, parse_mode="HTML")
-
-
-
-    
-    
-
-    
-
 
 
 # В случае всех не совпадений третим шагом
