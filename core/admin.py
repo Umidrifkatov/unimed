@@ -61,7 +61,7 @@ class TuserAdmin(admin.ModelAdmin):
 
     # This will help you to disable delete functionaliyt
     def has_delete_permission(self, request, obj=None):
-        return False
+        return True
 
 admin.site.register(Tuser, TuserAdmin)
 
