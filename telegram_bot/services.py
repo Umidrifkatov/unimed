@@ -1,4 +1,4 @@
-from core.models import *
+from core.models import Product, ParentCategory, Category
 from .constants import *
 import telebot
 from django.conf import settings
@@ -141,7 +141,11 @@ def phonewaitingstart(message, bot, user):
         user.phone = contact
         user.step = STEP['p_category']
         user.save()
-        text = f'Новый пользоваетль ждет обработки\nНомер телефона: +{contact}\n\nИсточник: {user.from_starter.name}'
+        if user.from_starter:
+            starter_is = user.from_starter.name
+        else:
+            starter_is = "Нет направителя"
+        text = f'Новый пользоваетль ждет обработки\nНомер телефона: +{contact}\n\nИсточник: {starter_is}'
         bot.send_message(settings.GROUP_ID, text)
 
         pic = open('./static/img/tgmain.jpeg', 'rb')
