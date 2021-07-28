@@ -46,7 +46,7 @@ def send_welcome(message): # https://t.me/Unimed_test_bot?start=1
     # second message with line and keybuttons
     text = 'Чтобы продолжить отправьте свой номер телефона далее'
     keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    connect = telebot.types.KeyboardButton(text='📱 Перезвонить мне', request_contact=True)
+    connect = telebot.types.KeyboardButton(text='Начать', request_contact=True)
     keyboard.add(connect)
     bot.send_message(user.userid, text, reply_markup=keyboard)
     
