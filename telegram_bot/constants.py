@@ -5,6 +5,7 @@ STEP = {
     'makeoffer':4,
     'waiting_phone':5,
     'manufacturer':6,
+    'waiting_phone_start':7,
 
 }
 

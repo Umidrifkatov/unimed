@@ -130,3 +130,42 @@ def product(message, bot, user):
 
 def group_notificator(text="test"):
     bot.send_message(settings.GROUP_ID, text, parse_mode="HTML")
+
+
+
+
+
+def phonewaitingstart(message, bot, user):
+    if message.content_type == 'contact':
+        contact = message.contact.phone_number
+        user.phone = contact
+        user.step = STEP['p_category']
+        user.save()
+
+        pic = open('./static/img/tgmain.jpeg', 'rb')
+        text = 'Установка <b>под ключ с гарантией</b>.  \n\nИз Европы и США по <b>низким ценам</b> '
+        keyboard = telebot.types.InlineKeyboardMarkup(row_width=2)
+        b1 = telebot.types.InlineKeyboardButton(text="Открыть сайт", url="unimedtrade.uz")
+        b2 = telebot.types.InlineKeyboardButton(text="О компании", url="unimedtrade.uz")
+        b3 = telebot.types.InlineKeyboardButton(text="Подробно о рассрочке", url="unimedtrade.uz")
+        b4 = telebot.types.InlineKeyboardButton(text='🔎 Поиск', switch_inline_query_current_chat="МРТ")
+        keyboard.add(b1,b2)
+        keyboard.add(b3)
+        keyboard.add(b4)
+        bot.send_photo(user.userid, pic, text, reply_markup=keyboard, parse_mode='HTML')
+        pic.close()
+        # second message with line and keybuttons
+        text = 'Выберите категорию'
+        keyboard = telebot.types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+        buttons = [telebot.types.KeyboardButton(text=i.name) for i in ParentCategory.objects.all()]
+        keyboard.add(*buttons)
+        bot.send_message(user.userid, text, reply_markup=keyboard)
+    else:
+        text = 'Чтобы продолжить отправьте свой номер телефона далее'
+        keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+        connect = telebot.types.KeyboardButton(text='📱 Перезвонить мне', request_contact=True)
+        keyboard.add(connect)
+        bot.send_message(user.userid, text, reply_markup=keyboard)
+
+
+

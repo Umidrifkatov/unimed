@@ -22,8 +22,7 @@ def worker(request):
 
     
 
-
-@bot.message_handler(commands=['start', 'help', 'назад']) # excluded from main commands handler for 'start', additional parsing data that com with start
+@bot.message_handler(commands=['start',]) # excluded from main commands handler for 'start', additional parsing data that com with start
 def send_welcome(message): # https://t.me/Unimed_test_bot?start=1
     mess = message.text.split()
     starter = None
@@ -33,18 +32,32 @@ def send_welcome(message): # https://t.me/Unimed_test_bot?start=1
             try:
                 starter = Starter.objects.get(key=mess[1])
             except Exception as e:
-                pass
-                         
+                pass           
          
         try:
             user = Tuser.objects.get(userid=message.from_user.id)
         except Exception as e:
-            user = Tuser.objects.create(userid=message.from_user.id, step=STEP['p_category'], from_starter=starter )
+            user = Tuser.objects.create(userid=message.from_user.id, step=STEP['waiting_phone_start'], from_starter=starter )
     except Exception as e:
         print(e)           
-    user.step = STEP['p_category']
+    user.step = STEP['waiting_phone_start']
     user.save()
 
+    # second message with line and keybuttons
+    text = 'Чтобы продолжить отправьте свой номер телефона далее'
+    keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    connect = telebot.types.KeyboardButton(text='📱 Перезвонить мне', request_contact=True)
+    keyboard.add(connect)
+    bot.send_message(user.userid, text, reply_markup=keyboard)
+    
+
+
+
+@bot.message_handler(commands=['help', 'назад',])
+def message_start_sc(message):
+    user = Tuser.objects.get(userid=message.from_user.id)
+    user.step = STEP['p_category']
+    user.save()
     # first message with pic and inline messages 
     pic = open('./static/img/tgmain.jpeg', 'rb')
     text = 'Установка <b>под ключ с гарантией</b>.  \n\nИз Европы и США по <b>низким ценам</b> '
@@ -64,11 +77,9 @@ def send_welcome(message): # https://t.me/Unimed_test_bot?start=1
     buttons = [telebot.types.KeyboardButton(text=i.name) for i in ParentCategory.objects.all()]
     keyboard.add(*buttons)
     bot.send_message(user.userid, text, reply_markup=keyboard)
-    
 
 
-
-
+# отправка сообщения о нас
 @bot.message_handler(commands=['about'])
 def connection(message):
     user = Tuser.objects.get(userid=message.from_user.id)
@@ -99,6 +110,7 @@ def all_text_messages_switcher(message, bot, user):
             STEP['product']: product,
             STEP['waiting_phone']: get_phone,
             STEP['manufacturer']: manufacturer,
+            STEP['waiting_phone_start']: phonewaitingstart,
 
             
         }
@@ -127,7 +139,7 @@ def buttons_answer(message):
         unknown_message(message, bot, user)
 
 
-
+# отправка сообщения о нас 
 @bot.callback_query_handler(func=lambda call: True)
 def call_message(message):
     parts = message.data
@@ -149,7 +161,6 @@ def call_message(message):
 def query_text(query):
     if not Tuser.objects.filter(userid = query.from_user.id).exists():
         Tuser.objects.create(userid=query.from_user.id)
-    
     kb = telebot.types.InlineKeyboardMarkup(row_width=2)
     first = telebot.types.InlineKeyboardButton(text="Сайт", url="unimedtrade.uz")
     second = telebot.types.InlineKeyboardButton(text="БОТ", url="https://t.me/UnimedStoreBot")
