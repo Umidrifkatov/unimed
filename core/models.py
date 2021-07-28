@@ -172,7 +172,7 @@ def passgenerate():
     return result
 
 class Starter(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Название', unique=True)
+    name = models.CharField(max_length=100, verbose_name='Название', unique=True, default='Нет')
     key = models.CharField(max_length=16, verbose_name='Ключ', unique=True, default=passgenerate)
     link = models.CharField(max_length=100, verbose_name='Ссылка', unique=True, default=f'https://t.me/UnimedStoreBot?start=')
 
