@@ -141,7 +141,7 @@ def phonewaitingstart(message, bot, user):
         user.phone = contact
         user.step = STEP['p_category']
         user.save()
-        text = f'Новый пользоваетль ждет обработки\nНомер телефона: +{a}'
+        text = f'Новый пользоваетль ждет обработки\nНомер телефона: +{contact}'
         bot.send_message(settings.GROUP_ID, text)
 
         pic = open('./static/img/tgmain.jpeg', 'rb')
