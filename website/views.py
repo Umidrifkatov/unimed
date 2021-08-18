@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
-
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 from core.models import *
 from website.forms import OrderForm, ContactRequestForm
+from telegram_bot.views import send_marketting_group
+import json
 
 
 class HomePage(TemplateView):
@@ -93,3 +96,12 @@ def Cooperate(request):
         "form": form
     }
     return render(request, 'core/cooperation.html', context)
+
+@csrf_exempt
+def Markettingmessage(request):
+    if request.method == "POST":
+        json_data = json.loads(request.body)
+        send_marketting_group(json_data)
+        return HttpResponse('200 OK')
+    else:
+        return HttpResponse('phone requried or send POST method')

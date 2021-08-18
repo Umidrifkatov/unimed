@@ -6,6 +6,8 @@ import telebot
 from .constants import BUTTONS, STEP
 from core.models import *
 from .services import *
+from django.conf import settings
+
 
 bot = telebot.TeleBot(settings.TOKEN, threaded=True)
 
@@ -186,3 +188,17 @@ def query_text(query):
         
             results.append(msg)
     bot.answer_inline_query(query.id, results, cache_time=0)
+
+
+
+def send_marketting_group(request):
+    phone = request['phone']
+    try:
+        email = request['email']
+    except Exception:
+        email = "Нет"
+    try:
+        message = request['message']
+    except Exception:
+        message = "Нет"
+    bot.send_message(settings.GROUP_ID, f'Запрос с сайта маркетинга \n\nТелефон: {phone}\nПочта: {email}\nСообщение: {message}')

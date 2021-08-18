@@ -143,7 +143,7 @@ LOC1 = 69.288738
 
 
 # TOKEN = '1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I' #test
-# # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://a2d0aed320f0.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
+# # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://06275081b466.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
 
 TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo' # prod
 # https://api.telegram.org/bot1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/setWebhook?url=https://unimedtrade.uz/telegram/1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/
