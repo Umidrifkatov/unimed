@@ -16,7 +16,7 @@ urlpatterns = [
     path('orderSuccess/', views.OrderSuccessPage.as_view(), name='order-success'),
     path('contactRequestSuccess/', views.OrderSuccessPage.as_view(), name='contact-request-success'),
     path('cooperate/', views.Cooperate, name='cooperate'),
-    path('send_marketting/', views.Markettingmessage),
+    path('send_marketing/', views.Markettingmessage),
 ]
 
 if settings.DEBUG:
