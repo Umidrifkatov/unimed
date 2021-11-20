@@ -145,8 +145,8 @@ LOC1 = 69.288738
 # TOKEN = '1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I' #test
 # # https://api.telegram.org/bot1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/setWebhook?url=https://06275081b466.ngrok.io/telegram/1865681910:AAGhE98ZwhXcbUAfrGE0iXrt0Vp_8ZcHB5I/
 
-TOKEN = '1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo' # prod
-# https://api.telegram.org/bot1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/setWebhook?url=https://unimedtrade.uz/telegram/1656217737:AAEW1ZgFFnbGBNenGHfnJvyJdU9AaeVcCbo/
+TOKEN = '1835181022:AAEui83kmGrfEjQ52Lg2xXwpDW1fJU-dQi0' # prod
+# https://api.telegram.org/bot1835181022:AAEui83kmGrfEjQ52Lg2xXwpDW1fJU-dQi0/setWebhook?url=https://unimedtrade.uz/telegram/1835181022:AAEui83kmGrfEjQ52Lg2xXwpDW1fJU-dQi0/
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
