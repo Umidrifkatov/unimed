@@ -7,7 +7,7 @@
 
 
 
-let baseurl = 'https://unimedtrade.uz/'
+let baseurl = 'https://9325-46-138-67-62.eu.ngrok.io/'
 
 if (window.Telegram.WebApp){
     var tg = window.Telegram.WebApp;
@@ -114,7 +114,7 @@ async function createlist(){
     for (var i in list){
             
         var item = `
-        <div class="forsearch" onclick="changepage(${i})">
+        <div class="forsearch" onclick="changepage(${list[i].id})">
         <div class=" d-flex justify-content-between align-items-center" >
         <div>
             <h5 class=" mb-0 mt-1 p-0">  ${list[i].name}</h5>
@@ -135,7 +135,6 @@ async function createlist(){
 
 async function changepage(elementid){
     let using = document.getElementById('secondcontent')
-  
     let url = baseurl + `api/product/${elementid}`;
     fetch(url)
     .then((response) => {
