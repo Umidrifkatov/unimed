@@ -7,7 +7,7 @@
 
 
 
-let baseurl = 'https://9325-46-138-67-62.eu.ngrok.io/'
+let baseurl = 'https://unimedtrade.uz/'
 
 if (window.Telegram.WebApp){
     var tg = window.Telegram.WebApp;
