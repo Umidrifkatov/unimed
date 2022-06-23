@@ -136,7 +136,7 @@ async function createlist(){
 async function changepage(elementid){
     let using = document.getElementById('secondcontent')
   
-    let url = baseurl + `api/product/${elementid + 1}`;
+    let url = baseurl + `api/product/${elementid}`;
     fetch(url)
     .then((response) => {
       return response.json();
