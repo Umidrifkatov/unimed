@@ -3,11 +3,7 @@
 
 
 
-
-
-
-
-let baseurl = 'https://unimedtrade.uz/'
+let baseurl = window.location.hostname
 
 if (window.Telegram.WebApp){
     var tg = window.Telegram.WebApp;
